@@ -17,7 +17,7 @@ Aplikasi memungkinkan pengguna untuk:
 ## 🎯 Fitur Utama
 
 * Upload file (image/video)
-* Deteksi deepfake berbasis AI (simulasi)
+* Deteksi deepfake berbasis AI
 * Menampilkan hasil REAL / FAKE
 * Confidence score (%)
 * Preview file sebelum upload
