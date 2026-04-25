@@ -31,9 +31,6 @@ Aplikasi memungkinkan pengguna untuk:
 * **Frontend**: HTML, CSS, Bootstrap
 * **Library Pendukung**:
 
-  * Flask
-  * Random (simulasi AI)
-
 ---
 
 ## ⚙️ Cara Menjalankan Project
