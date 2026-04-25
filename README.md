@@ -36,20 +36,6 @@ Aplikasi memungkinkan pengguna untuk:
 
 ---
 
-## 📂 Struktur Project
-
-```
-deepfake-detection/
-│── app.py
-│── requirements.txt
-│── templates/
-│   └── index.html
-│── static/
-│── uploads/
-```
-
----
-
 ## ⚙️ Cara Menjalankan Project
 
 ### 1. Clone Repository
