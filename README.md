@@ -1,4 +1,4 @@
-# 🚀 Deepfake Detection & Media Verification AI
+# 🚀 Deepfake Detection
 
 ## 📌 Deskripsi Project
 
@@ -109,19 +109,11 @@ Sistem yang dikembangkan telah memenuhi kebutuhan yang dirancang sebelumnya, yai
 * Output hasil ✔️
 * Confidence score ✔️
 
----
-
-## ⚠️ Catatan
-
-Model AI yang digunakan dalam project ini masih berupa **simulasi (dummy model)** untuk kebutuhan pembelajaran dan demonstrasi sistem.
-Pengembangan lebih lanjut dapat menggunakan model CNN/LSTM untuk hasil yang lebih akurat.
-
----
 
 ## 👨‍💻 Pengembang
 
-* Nama: (Isi Nama Kamu)
-* NIM: (Isi NIM Kamu)
+* Nama: Richa Cinta Sari
+* NIM: 202310370311262
 * Mata Kuliah: Rekayasa Kebutuhan
 
 ---
