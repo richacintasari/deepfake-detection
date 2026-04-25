@@ -65,7 +65,7 @@ http://127.0.0.1:5000
 ## 🌐 Link Penting
 
 * 🔗 GitHub Repository: https://github.com/username/deepfake-detection
-* 🌍 Live Demo: https://your-app.onrender.com
+* 🌍 Live Demo: https://deepfake-detection-neon.vercel.app/
 
 ---
 
