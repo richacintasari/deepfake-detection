@@ -1,0 +1,69 @@
+body {
+    background: linear-gradient(135deg, #141e30, #243b55);
+    font-family: 'Poppins', sans-serif;
+    color: white;
+}
+
+/* Glass */
+.glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    animation: fadeIn 0.5s ease;
+}
+
+/* Preview */
+.preview {
+    width: 100%;
+    max-width: 350px;
+    max-height: 220px;
+    object-fit: contain;
+    margin: 15px auto;
+    display: block;
+    border-radius: 10px;
+}
+
+/* Chart */
+.chart-container {
+    width: 220px;
+    height: 220px;
+    margin: auto;
+}
+
+.chart-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Loader */
+.loader {
+    display: none;
+    margin-top: 15px;
+}
+
+/* Animasi */
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(10px);}
+    to {opacity: 1;}
+}
+
+/* List */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding: 5px 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .chart-container {
+        width: 180px;
+        height: 180px;
+    }
+}

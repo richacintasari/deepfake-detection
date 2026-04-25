@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Deepfake Detection AI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- Chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">🚀 Deepfake Detection AI</h2>
+
+    <!-- FORM -->
+    <div class="glass">
+        <form method="POST" enctype="multipart/form-data" onsubmit="showLoader()">
+
+            <select class="form-select mb-3">
+                <option>Image Analysis</option>
+                <option>Video Analysis</option>
+            </select>
+
+            <input type="file" name="file" id="fileInput" class="form-control mb-3" required onchange="previewFile()">
+
+            <!-- Preview -->
+            <img id="previewImg" class="preview d-none"/>
+            <video id="previewVideo" class="preview d-none" controls></video>
+
+            <button class="btn btn-primary w-100 mt-3">🔍 Deteksi Sekarang</button>
+        </form>
+
+        <div class="text-center loader" id="loader">
+            <div class="spinner-border text-light"></div>
+            <p>Processing AI...</p>
+        </div>
+    </div>
+
+    {% if result %}
+    <!-- RESULT LAYOUT -->
+    <div class="row mt-4">
+
+        <!-- LEFT: CHART -->
+        <div class="col-md-6 text-center">
+            <div class="glass">
+                <h5>📊 Confidence Chart</h5>
+                <div class="chart-container">
+                    <canvas id="confidenceChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT: ANALYSIS + HISTORY -->
+        <div class="col-md-6">
+
+            <div class="glass mb-3">
+                <h5>🔍 Image Analysis</h5>
+
+                {% if result == "REAL" %}
+                    <span class="badge bg-success p-2">REAL ✅</span>
+                {% else %}
+                    <span class="badge bg-danger p-2">FAKE ⚠️</span>
+                {% endif %}
+
+                <p class="mt-2"><strong>Confidence:</strong> {{ confidence }}%</p>
+
+                <!-- Progress -->
+                <div class="progress mb-2">
+                    <div class="progress-bar bg-info" style="width: {{ confidence }}%">
+                        {{ confidence }}%
+                    </div>
+                </div>
+
+                <!-- Explainable -->
+                {% if reason %}
+                <p class="text-warning">⚠️ {{ reason }}</p>
+                {% endif %}
+
+                <!-- Breakdown -->
+                {% if breakdown %}
+                <ul class="text-start">
+                    {% for key, value in breakdown.items() %}
+                    <li>{{ key }}: {{ value }}%</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+
+            <!-- HISTORY -->
+            <div class="glass">
+                <h5>📜 Riwayat Deteksi</h5>
+                {% if history %}
+                <ul>
+                    {% for item in history %}
+                    <li>{{ item.name }} - {{ item.result }} ({{ item.confidence }}%)</li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p class="text-muted">Belum ada riwayat</p>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- ABOUT -->
+    <div class="glass mt-4">
+        <h5>📖 Tentang Sistem</h5>
+        <p>
+        Sistem ini menggunakan pendekatan Computer Vision untuk mendeteksi deepfake
+        dengan menganalisis inkonsistensi visual, tekstur, dan pencahayaan.
+        </p>
+    </div>
+
+</div>
+
+<script>
+function previewFile() {
+    const file = document.getElementById('fileInput').files[0];
+    const img = document.getElementById('previewImg');
+    const video = document.getElementById('previewVideo');
+
+    if (file) {
+        const type = file.type;
+
+        if (type.startsWith("image")) {
+            img.src = URL.createObjectURL(file);
+            img.classList.remove("d-none");
+            video.classList.add("d-none");
+        } else if (type.startsWith("video")) {
+            video.src = URL.createObjectURL(file);
+            video.classList.remove("d-none");
+            img.classList.add("d-none");
+        }
+    }
+}
+
+function showLoader() {
+    document.getElementById("loader").style.display = "block";
+}
+
+{% if result %}
+const confidence = {{ confidence }};
+let realScore = 0;
+let fakeScore = 0;
+
+if ("{{ result }}" === "REAL") {
+    realScore = confidence;
+    fakeScore = 100 - confidence;
+} else {
+    fakeScore = confidence;
+    realScore = 100 - confidence;
+}
+
+const ctx = document.getElementById('confidenceChart').getContext('2d');
+
+new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: ['REAL', 'FAKE'],
+        datasets: [{
+            data: [realScore, fakeScore],
+            backgroundColor: ['#36A2EB', '#FF6384']
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false
+    }
+});
+{% endif %}
+</script>
+
+</body>
+</html>
